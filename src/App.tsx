@@ -6,7 +6,9 @@ import { GlobalStyle } from "./GlobalStyle";
 const App:React.FC =()=> {
   const [todo,setTodo]=useState<string >("")
   const[todos,setTodos]=useState<Todo[ ]>([])
-  const handeleAdd = 
+  const handleAdd = ()=>{
+    
+  }
   return (
     <div className="App">
       <span className="title">TASKIFY</span>
