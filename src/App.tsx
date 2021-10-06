@@ -1,7 +1,11 @@
-function App() {
+import {GlobalStyle} from "./GlobalStyle"
+import InputField from "./components/form/index"
+const App:React.FC =()=> {
   return (
     <div className="App">
-hello
+      <span className="title">TASKIFY</span>
+<InputField/>
+<GlobalStyle/>
     </div>
   );
 }
