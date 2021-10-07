@@ -20,7 +20,10 @@ box-shadow: inset 0 0 5px black;
     box-shadow: 0 0 10px 1000px rgba(0,0,0,0.5);
     outline: none;
 }
+@media screen and (max-width: 700px) {
 
+    width: 95%;
+}
 
 `
 

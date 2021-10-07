@@ -10,6 +10,7 @@ const inputRef = useRef<HTMLInputElement >(null)
     return (
         <Form onSubmit={(e)=>{handleAdd(e)
         inputRef.current?.blur()}}>
+            
             <Input type="input" placeholder="Enter your task" value={todo}
             onChange={(e)=>{
                 setTodo(e.target.value)
