@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { MdDelete, MdDone, MdModeEdit } from "react-icons/md"
 import { Todo } from '../../model/model'
-import {MdModeEdit,MdDelete,MdDone}from "react-icons/md"
-import {SingleTodos,SingleText,Icon} from "./view"
+import { Icon, SingleText, SingleTextNotDone, SingleTodos } from "./view"
+// type for props
 type Props = {
     todo:Todo,
     todos:Todo[],
@@ -9,15 +10,45 @@ type Props = {
 
 }
 function SingleTodo({todos,setTodos,todo}:Props) {
+// make use state for edit card
+const [edit,setEdit]=useState<boolean>(false)
+// useState to update text that changed
+const[editTodo,setEditTodo]=useState<string>(todo.todo)
+
+    // functions to done 
     const handelDone=(id:number)=>{ 
-        // setTodos(todos.map())
+        setTodos(
+            todos.map((todo) =>
+              todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+            )
+          );
     }
+    //  functions to delete
+    const handelDelete= (id:number)=>{
+        setTodos(todos.filter ((todo)=> todo.id!==id))
+       
+
+    }
+
     return (
         <SingleTodos>
-            <SingleText>{todo.todo}</SingleText>
+            {
+                todo.isDone ? (
+                    <SingleTextNotDone className="todos__single--text">{todo.todo}</SingleTextNotDone>
+                  ) : (
+                
+                      <SingleText>{todo.todo}</SingleText>
+                  )
+            }
             <div>
-                <Icon><MdModeEdit/></Icon>
-                <Icon><MdDelete/></Icon>
+                <Icon onClick={()=>{
+                    if (!edit && !todo.isDone) {
+                        setEdit(!edit)
+                      }
+                }
+                     
+                }><MdModeEdit/></Icon>
+                 <Icon onClick={()=>handelDelete(todo.id)}><MdDelete  /></Icon>
                 <Icon onClick={()=>handelDone(todo.id)}><MdDone/></Icon>
             </div>
             

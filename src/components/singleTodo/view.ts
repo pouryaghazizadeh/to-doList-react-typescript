@@ -27,6 +27,17 @@ export const SingleText = styled.span`
   }
 
 `
+export const SingleTextNotDone = styled.s`
+  flex: 1;
+  padding: 5px;
+  border: none;
+  font-size: 20px;
+
+  &:focus{
+    outline: none;
+  }
+
+`
 
 export const Icon = styled.span`
   margin-left: 10px;
