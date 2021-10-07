@@ -1,6 +1,7 @@
 import React from 'react'
-import { Todo } from '../model/model'
+import { Todo } from '../../model/model'
 import {MdModeEdit,MdDelete,MdDone}from "react-icons/md"
+import {SingleTodos,SingleText,Icon} from "./view"
 type Props = {
     todo:Todo,
     todos:Todo[],
@@ -8,16 +9,19 @@ type Props = {
 
 }
 function SingleTodo({todos,setTodos,todo}:Props) {
+    const handelDone=(id:number)=>{ 
+        // setTodos(todos.map())
+    }
     return (
-        <form>
-            <span>{todo.todo}</span>
+        <SingleTodos>
+            <SingleText>{todo.todo}</SingleText>
             <div>
-                <span><MdModeEdit/></span>
-                <span><MdDelete/></span>
-                <span><MdDone/></span>
+                <Icon><MdModeEdit/></Icon>
+                <Icon><MdDelete/></Icon>
+                <Icon onClick={()=>handelDone(todo.id)}><MdDone/></Icon>
             </div>
             
-        </form>
+        </SingleTodos>
     )
 }
 
