@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdDelete, MdDone, MdModeEdit } from "react-icons/md"
 import { Todo } from '../../model/model'
-import { Icon, SingleText, SingleTextNotDone, SingleTodos } from "./view"
+// style
+import { EditTodoInput, Icon, SingleText, SingleTextNotDone, SingleTodos } from "./view"
 // type for props
 type Props = {
     todo:Todo,
@@ -29,17 +30,38 @@ const[editTodo,setEditTodo]=useState<string>(todo.todo)
        
 
     }
+// functions to edit text
+const handelEdit = (e:React.FormEvent,id:number )=>{
+    e.preventDefault();
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo))
+    );
+    setEdit(false);
+
+}
+
+// to focus on input
+const inputRef = useRef<HTMLInputElement>(null)
+useEffect(()=>{
+inputRef.current?.focus()
+},
+[edit])
 
     return (
-        <SingleTodos>
-            {
-                todo.isDone ? (
-                    <SingleTextNotDone className="todos__single--text">{todo.todo}</SingleTextNotDone>
-                  ) : (
+        <SingleTodos  onSubmit={(e)=>handelEdit(e,todo.id)}>
+            {edit?(
+                <EditTodoInput ref={inputRef} value={editTodo} onChange={(e)=>setEditTodo(e.target.value)}/>
+            ):(
                 
-                      <SingleText>{todo.todo}</SingleText>
-                  )
+                    todo.isDone ? (
+                        <SingleTextNotDone className="todos__single--text">{todo.todo}</SingleTextNotDone>
+                      ) : (
+                    
+                          <SingleText>{todo.todo}</SingleText>
+                      )
+            )
             }
+  
             <div>
                 <Icon onClick={()=>{
                     if (!edit && !todo.isDone) {
