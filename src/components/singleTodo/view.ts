@@ -44,3 +44,17 @@ export const Icon = styled.span`
   font-size: 25px;
   cursor: pointer;
 `
+
+
+export const EditTodoInput = styled.input`
+  flex: 1;
+  padding: 5px;
+  border: none;
+  font-size: 20px;
+  &focus{
+      outline: none;
+  }
+
+
+`
+
